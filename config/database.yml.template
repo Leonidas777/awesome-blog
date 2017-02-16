@@ -1,0 +1,18 @@
+development: &development
+  adapter: postgresql
+  encoding: unicode
+  database: awesome_blog_development
+  pool: 100
+  username: user_name
+  password: user_password
+  host: localhost
+  min_messages: WARNING
+  insert_returning: false
+
+test:
+  <<: *development
+  database: awesome_blog_test
+
+production:
+  <<: *development
+  database: awesome_blog_production
