@@ -6,4 +6,10 @@ FactoryGirl.define do
     description     { Faker::Lorem.paragraph }
     author_ip       { Faker::Internet.ip_v4_address }
   end
+
+  trait :with_rates do
+    after(:create) do |post|
+      post.rates << create_list(:rate, 2)
+    end
+  end
 end
