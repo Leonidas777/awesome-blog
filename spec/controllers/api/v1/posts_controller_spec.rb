@@ -3,6 +3,33 @@ require 'rails_helper'
 describe Api::V1::PostsController, type: :controller do
   render_views
 
+  describe '#index' do
+    Given { @post_1 = create :post }
+    Given { @post_2 = create :post }
+    Given { @post_3 = create :post }
+    Given { @post_4 = create :post }
+
+    Given { create :rate, post: @post_1, value: 5 }
+    Given { create :rate, post: @post_1, value: 4 }
+
+    Given { create :rate, post: @post_2, value: 1 }
+    Given { create :rate, post: @post_2, value: 2 }
+
+    Given { create :rate, post: @post_3, value: 3 }
+    Given { create :rate, post: @post_3, value: 4 }
+
+    Given { create :rate, post: @post_4, value: 2 }
+    Given { create :rate, post: @post_4, value: 2 }
+
+    context 'when getting 3 most popular posts' do
+      When { get :index, params: { format: :json, number: 3 } }
+      Then { expect(JSON.parse(response.body)).to eq('posts' => [simple_post_json(@post_1), 
+                                                                 simple_post_json(@post_3),
+                                                                 simple_post_json(@post_4)]) }
+      And { expect(response.status).to eq 200 }
+    end
+  end
+
   describe '#create' do
     When { post :create, params: params }
 

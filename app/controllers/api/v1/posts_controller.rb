@@ -1,6 +1,12 @@
 class Api::V1::PostsController < Api::V1::BaseController
   before_action :build_resource, only: [:create]
 
+  def index
+    @posts = Post.all.most_popular(params[:number])
+
+    render 'api/v1/posts/index', status: 200
+  end
+
   def create
     if @resource.save
       render 'api/v1/posts/show', status: 201
