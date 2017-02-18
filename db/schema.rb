@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170216171506) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "title",       null: false
+    t.string  "name",        null: false
     t.string  "description", null: false
     t.string  "author_ip"
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree

@@ -7,8 +7,8 @@ class CreateUsersAndPostsWithRates < ActiveRecord::Migration[5.0]
     create_table :posts do |t|
       t.belongs_to :user
 
-      t.string  :title,       null: false
-      t.string  :description, null: false
+      t.string :name,       null: false
+      t.string :description, null: false
       t.string :author_ip
     end
 

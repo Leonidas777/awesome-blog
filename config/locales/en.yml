@@ -20,4 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  errors:
+    not_found:            "Sorry, but it can't be find."
+    something_went_wrong: 'Something went wrong. If the problem continues, close and re-open the app.'
