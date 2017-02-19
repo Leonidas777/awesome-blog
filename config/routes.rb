@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :posts, only: [:index, :create] do
         resources :rates, only: [:create]
-      end      
+      end
+
+      resources :user_ip_addresses, only: [:index]
     end
   end
 
