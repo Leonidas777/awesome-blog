@@ -8,6 +8,7 @@ describe Api::V1::PostsController, type: :controller do
     Given { @post_2 = create :post }
     Given { @post_3 = create :post }
     Given { @post_4 = create :post }
+    Given { @post_5 = create :post }
 
     Given { create :rate, post: @post_1, value: 5 }
     Given { create :rate, post: @post_1, value: 4 }
@@ -23,10 +24,10 @@ describe Api::V1::PostsController, type: :controller do
 
     context 'when getting 3 most popular posts' do
       When { get :index, params: { format: :json, number: 3 } }
-      Then { expect(JSON.parse(response.body)).to eq('posts' => [simple_post_json(@post_1), 
-                                                                 simple_post_json(@post_3),
-                                                                 simple_post_json(@post_4)]) }
-      And { expect(response.status).to eq 200 }
+      Then { expect(JSON.parse(response.body)).to eq('posts' => [simple_post_json(@post_1, { 'average_rate' => '4.5' }),
+                                                                 simple_post_json(@post_3, { 'average_rate' => '3.5' }),
+                                                                 simple_post_json(@post_4, { 'average_rate' => '2.0' })]) }
+      And  { expect(response.status).to eq 200 }
     end
   end
 

@@ -4,10 +4,6 @@ class Post < ActiveRecord::Base
 
   validates :name, :description, presence: true
 
-  scope :most_popular, ->(number) { joins(:rates).group('posts.id').order('AVG(rates.value) DESC').limit(number) }
-
-  def average_rate
-    rates.average(:value).round(2)
-  end  
+  scope :most_popular, ->(number) { joins(:rates).group('posts.id').order('average_rate_count DESC NULLS LAST').limit(number) }
 end
 

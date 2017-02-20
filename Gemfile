@@ -9,6 +9,7 @@ gem 'factory_girl_rails'
 gem 'inherited_resources'
 gem 'has_scope'
 gem 'rabl-rails'
+gem 'curb'
 
 group :development, :test do
   gem 'pry-rails'

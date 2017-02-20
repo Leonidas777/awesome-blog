@@ -17,20 +17,22 @@ ActiveRecord::Schema.define(version: 20170216171506) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "name",        null: false
-    t.string  "description", null: false
+    t.string  "name",                                       null: false
+    t.string  "description",                                null: false
     t.string  "author_ip"
+    t.decimal "average_rate_count", precision: 3, scale: 2
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
   create_table "rates", force: :cascade do |t|
     t.integer "post_id"
-    t.integer "value",   null: false
+    t.integer "value",   default: 1, null: false
     t.index ["post_id"], name: "index_rates_on_post_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
     t.string "login", null: false
+    t.index ["login"], name: "index_users_on_login", using: :btree
   end
 
   validates("rates", "value", inclusion: { in: 1..5, as: :check })
