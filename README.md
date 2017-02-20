@@ -1,24 +1,61 @@
-# README
+#README - Awesome Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Ruby version
 
-* Ruby version
+**Ruby 2.3.1**
 
-* System dependencies
 
-* Configuration
 
-* Database creation
+## Setup instructions
 
-* Database initialization
+Copy ruby versions manager config files
+```
+cp .ruby-gemset.template .ruby-gemset
+cp .ruby-version.template .ruby-version
 
-* How to run the test suite
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Copy the file with environment constants
+```
+cp .env.template .env
+```
 
-* Deployment instructions
+Reload ruby versions manager
 
-* ...
+Copy database config
+```
+cp config/database.yml.template config/database.yml
+```
+
+Add to config/database.yml username and password from PostgreSQL
+
+Install gems
+```
+bundle install
+```
+
+Setup database
+```
+rake db:setup
+```
+
+Start rails server 
+```
+rails s puma
+```
+
+
+
+## How to run the test suite
+
+```bash
+bundle exec rspec spec
+```
+
+
+## How to run the application
+
+```bash
+bundle exec rails s
+```

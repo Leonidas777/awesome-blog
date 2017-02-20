@@ -6,10 +6,10 @@ gem 'pg'
 gem 'mv-postgresql'
 gem 'faker'
 gem 'factory_girl_rails'
-gem 'inherited_resources'
-gem 'has_scope'
+gem "responders"
 gem 'rabl-rails'
-gem 'curb'
+gem 'rest-client'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'pry-rails'

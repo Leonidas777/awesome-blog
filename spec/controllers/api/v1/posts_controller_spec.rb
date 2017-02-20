@@ -34,22 +34,25 @@ describe Api::V1::PostsController, type: :controller do
   describe '#create' do
     When { post :create, params: params }
 
-    context 'when user exists' do
+    context 'when there are all required parameters' do
       Given(:params) { { format: :json, user_login: 'leo', post: { name: 'New group', description: 'Some text.', author_id: '153.101.209.83' } } }
-      Given { @user = create :user, login: 'leo' }
-      Then  { expect(JSON.parse(response.body)).to eq({ 'success' => true, 'post' => post_json(Post.last) }) }
-      And   { expect(response.status).to eq 201 }
-      And   { expect(Post.count).to eq 1 }
-      And   { expect(@user.posts).to eq [Post.last] }
-    end
+      
+      context 'when user exists' do      
+        Given { @user = create :user, login: 'leo' }
+        Then  { expect(JSON.parse(response.body)).to eq({ 'success' => true, 'post' => post_json(Post.last) }) }
+        And   { expect(response.status).to eq 201 }
+        And   { expect(Post.count).to eq 1 }
+        And   { expect(@user.posts).to eq [Post.last] }
+      end
 
-    context 'when user does not exist' do
-      Given(:params) { { format: :json, user_login: 'leo', post: { name: 'New group', description: 'Some text.', author_id: '153.101.209.83' } } }
-      Then { expect(JSON.parse(response.body)).to eq({ 'success' => true, 'post' => post_json(Post.last) }) }
-      And  { expect(response.status).to eq 201 }
-      And  { expect(Post.count).to eq 1 }
-      And  { expect(User.count).to eq 1 }
-      And  { expect(User.last.posts).to eq [Post.last] }
+      context 'when user does not exist' do
+        Given(:params) { { format: :json, user_login: 'leo', post: { name: 'New group', description: 'Some text.', author_id: '153.101.209.83' } } }
+        Then { expect(JSON.parse(response.body)).to eq({ 'success' => true, 'post' => post_json(Post.last) }) }
+        And  { expect(response.status).to eq 201 }
+        And  { expect(Post.count).to eq 1 }
+        And  { expect(User.count).to eq 1 }
+        And  { expect(User.last.posts).to eq [Post.last] }
+      end
     end
 
     context 'when name has not been passed' do

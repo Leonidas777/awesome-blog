@@ -19,6 +19,8 @@ class CreateUsersAndPostsWithRates < ActiveRecord::Migration[5.0]
       t.belongs_to :post
 
       t.integer :value, null: false, default: 1, validates: { inclusion: { in: 1..5, as: :check } }
+
+      t.index :value
     end
   end
 end

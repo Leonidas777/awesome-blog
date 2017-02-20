@@ -3,8 +3,6 @@ class Api::V1::BaseController < ApplicationController
 
   respond_to :json
 
-  PER_PAGE = 20
-
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, with: :respond_with_500
 

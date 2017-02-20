@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170216171506) do
     t.integer "post_id"
     t.integer "value",   default: 1, null: false
     t.index ["post_id"], name: "index_rates_on_post_id", using: :btree
+    t.index ["value"], name: "index_rates_on_value", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
